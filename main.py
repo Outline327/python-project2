@@ -1,32 +1,32 @@
 import pygame
-import os
+import sys
 
-WIDTH, HEIGHT = 1535, 800
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+# Initialize Pygame
+pygame.init()
 
-FPS = 60
-GUN_1 = pygame.image.load(os.path.join('venv', 'gun1.png'))
-WHITE = (255, 255, 255)
-pygame.display.set_caption("The game")
+# Set the dimensions of your game window
+screen_width, screen_height = 800, 600
+screen = pygame.display.set_mode((screen_width, screen_height))
 
+# Load the image
+image = pygame.image.load("C:\\Users\\ROG STRIX\\PycharmProjects\\pythonProject\\your_image.png.png")
 
+# Main game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
+    # Clear the screen
+    screen.fill((255, 255, 0))
 
-def window_draw():
-    WIN.fill(WHITE)
-    WIN.blit(GUN_1, (0, 0))
+    # Blit (draw) the image on the screen at a specific position
+    screen.blit(image, (0, 0))  # You can adjust the position as needed
+
+    # Update the display
     pygame.display.update()
 
-
-def main(run=True, clock=None):
-    runpy = True
-    while runpy:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-
-                pygame.quit()
-
-
-if __name__ == "__main__":
-    main()
+# Quit Pygame
+pygame.quit()
+sys.exit()
