@@ -1,32 +1,61 @@
+import time
+
 import pygame
 import sys
 
-# Initialize Pygame
 pygame.init()
 
-# Set the dimensions of your game window
-screen_width, screen_height = 800, 600
-screen = pygame.display.set_mode((screen_width, screen_height))
+# Set up the display
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Moving Image Example")
 
-# Load the image
-image = pygame.image.load("C:\\Users\\ROG STRIX\\PycharmProjects\\pythonProject\\your_image.png.png")
+# Load your image
+image = pygame.image.load("C:\\Users\\ROG STRIX\\PycharmProjects\\team_forest_3\\pixil-frame-0 (1).png")
+image_rect = image.get_rect()
 
-# Main game loop
+# Set the initial position
+x, y = 100, 100
+image_rect.topleft = (x, y)
+
+
+
+
+# Define some variables
+speed = 5
+clock = pygame.time.Clock()
+
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # Clear the screen
-    screen.fill((255, 255, 0))
+    # Get the state of all keys
+    keys = pygame.key.get_pressed()
 
-    # Blit (draw) the image on the screen at a specific position
-    screen.blit(image, (0, 0))  # You can adjust the position as needed
+    # Update the image's position based on user input
+    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+        x -= speed
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+        x += speed
+    if keys[pygame.K_UP] or keys[pygame.K_w]:
+        y -= speed
+    if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+        y += speed
+
+    # Clear the screen
+    screen.fill((0, 0, 0))
+
+    # Blit the image onto the screen
+    screen.blit(image, (x, y))
 
     # Update the display
-    pygame.display.update()
+    pygame.display.flip()
 
-# Quit Pygame
+    # Limit the frame rate
+    clock.tick(60)
+
+# Quit pygame
 pygame.quit()
 sys.exit()
